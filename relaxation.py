@@ -4,7 +4,7 @@ import numpy as np
 
 
 
-def relax(V, mask, tol: 1e-6, max_iter: int = 100000):
+def relax(V, mask, tol: float = 1e-6, max_iter: int = 100000):
 
     #copy of the inital patential
     V = V.copy()
@@ -14,10 +14,10 @@ def relax(V, mask, tol: 1e-6, max_iter: int = 100000):
 
         #Jacobi update for all inner cells
         V_new[1: -1, 1:-1] = 0.25 * (
-            V[2:,  1: -1]+
+            V[2:, 1: -1]+
             V[:-2, 1:-1]+
-            V[1:, -1:2:]+
-            V[1:,-1, :-2]
+            V[1:-1, 2:]+
+            V[1:-1, :-2]
         )
 
         #jede Zellen bei der die maske True ist werden wieder auf ihren alten Wert gesetz

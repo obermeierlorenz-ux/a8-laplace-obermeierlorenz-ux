@@ -1,4 +1,4 @@
-import relaxation
+from relaxation import relax
 import numpy as np
 
 #creat inital V
@@ -34,5 +34,11 @@ V[0, :] = 1.0
 V[-1,:] = 0.0
 V[:, 0] = 0.0
 V[:,-1] = 0.0
+
+V_final, sweeps, max_change = relax(V, mask)
+print('number of sweeps: ', sweeps)
+print('final maximum cheanges:', max_change)
+print()
+print(V_final)
 
 
