@@ -12,6 +12,7 @@ def relax(V, mask, tol: float = 1e-6, max_iter: int = 100000):
     for sweep in range(1, max_iter +1):
         V_new = V.copy()
 
+        #used chatGPT for this Jacobi update cell, my version didnt realy work or took to long
         #Jacobi update for all inner cells
         V_new[1: -1, 1:-1] = 0.25 * (
             V[2:, 1: -1]+

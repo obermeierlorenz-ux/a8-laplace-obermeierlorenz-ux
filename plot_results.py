@@ -92,8 +92,16 @@ plot_potential(
 
 plot_potential(
     'data/split_shell.csv',
-    'Split shell',
-    'Four edge',
-    vmin=-0.5,
+    'split_shell',
+    'Split Circular Shell',
+    vmin=-10.0,
+    vmax=10.0
+)
+
+plot_potential(
+    'data/dipole.csv',
+    'dipole',
+    'Electrode Dipole',
+    vmin=-1.0,
     vmax=1.0
 )

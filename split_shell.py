@@ -41,12 +41,12 @@ V[-1,:] = V_right
 V[:, 0] = V_bottom
 V[:,-1] = V_top
 
-#corner values: average
+# #corner values: average
 
-V[0, 0] = 0.5 * (V_left + V_bottom)
-V[0, -1] = 0.5 * (V_left + V_top)
-V[-1, 0] = 0.5 * (V_right + V_bottom)
-V[-1, -1] = 0.5 * (V_right + V_top)
+# V[0, 0] = 0.5 * (V_left + V_bottom)
+# V[0, -1] = 0.5 * (V_left + V_top)
+# V[-1, 0] = 0.5 * (V_right + V_bottom)
+# V[-1, -1] = 0.5 * (V_right + V_top)
 
 #circular shell settings
 x0 = L / 2
@@ -54,11 +54,11 @@ y0 = L / 2
 
 R = L / 3 
 thickness = 0.05 * L
+
 # distance of every cell center from the shell center
 r = np.sqrt((X- x0)**2 + (Y - y0)**2)
 
 #Cells inside the physical shell thickness
-
 shell_mask = (( r >= R - thickness / 2) & (r<= R + thickness / 2 ))
 
 #fix the shell cells
