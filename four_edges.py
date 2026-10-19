@@ -59,7 +59,7 @@ data = np.column_stack((
 ))
 
 np.savetxt(
-    'data/one_edge.csv',
+    'data/four_edge.csv',
     data,
     delimiter=',',
     header='x,y,V',
@@ -71,6 +71,6 @@ print('final maximum cheanges:', max_change)
 print('minimum potential:', np.min(V_final))
 print('maximum potential:', np.max(V_final))
 print()
-print(V_final)
+
 
 

@@ -60,6 +60,6 @@ np.savetxt(
 print('number of sweeps: ', sweeps)
 print('final maximum cheanges:', max_change)
 print()
-print(V_final)
+
 
 
