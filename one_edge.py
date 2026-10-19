@@ -30,12 +30,33 @@ y = np.linspace(h / 2, L - h / 2, N)
 X, Y = np.meshgrid(x, y, indexing="ij")
 
 #Edges of my Field/Matrix have fixed values, they dont get changed during calculations
-V[0, :] = 1.0
+V[0, :] = 0.0
 V[-1,:] = 0.0
 V[:, 0] = 0.0
-V[:,-1] = 0.0
+V[:,-1] = 1.0
+
+#corner values: average
+
+V[0, -1] = 0.5
+V[-1, -1] = 0.5
 
 V_final, sweeps, max_change = relax(V, mask)
+
+#save cell-center coordination and final potential
+data = np.column_stack((
+    X.ravel(),
+    Y.ravel(),
+    V_final.ravel()
+))
+
+np.savetxt(
+    'data/one_edge.csv',
+    data,
+    delimiter=',',
+    header='x,y,V',
+    comments=''
+)
+
 print('number of sweeps: ', sweeps)
 print('final maximum cheanges:', max_change)
 print()
