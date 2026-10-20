@@ -27,11 +27,11 @@ def relax(V, mask, source=None, h: float=1,  tol: float = 1e-4, max_iter: int = 
                             V[i - 1, j] +
                             V[i, j + 1] +
                             V[i, j - 1] +
-                            h**2 source[i, j])  
+                            h**2 *source[i, j] 
+                            )
          
         #jede Zellen bei der die maske True ist werden wieder auf ihren alten Wert gesetz
         V_new[mask] = V[mask]
-
 
         #prüft wie stark sich ein feld in einem sweep verändert
         #ist die großte änderung klein trifft if unten zu

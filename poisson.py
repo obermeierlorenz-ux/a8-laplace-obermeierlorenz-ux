@@ -34,12 +34,23 @@ X, Y = np.meshgrid(x, y, indexing="ij")
 sigma = 0.08 * L
 S0 = 100.0
 
-source = S0 * np.exp(-((X-L / 2 )**2) + (Y-L / 2)**2) / (2*sigma**2)
+source = S0 * np.exp(-((X-L / 2 )**2 + (Y-L / 2)**2) / (2*sigma**2))
 
 #solver
-V_final, sweeps, max_change = relax(V, source, mask)
+V_final, sweeps, max_change = relax(V,  mask, source, h)
 
-#save cell-center coordination and final potential
+#max lacation
+
+max_index = np.unravel_index(np.argmax(V_final), V_final.shape)
+
+max_x = X[max_index]
+max_y = Y[max_index]
+max_V = V_final[max_index]
+
+print('maximum potential:', max_V)
+print('maximum location:', (max_x, max_y))
+
+#save cell center coordination and final potential
 data = np.column_stack((
     X.ravel(),
     Y.ravel(),
@@ -56,6 +67,4 @@ np.savetxt(
 
 print('number of sweeps: ', sweeps)
 print('final maximum cheanges:', max_change)
-print('minimum potential:', np.min(V_final))
-print('maximum potential:', np.max(V_final))
-print()
+
