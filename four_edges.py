@@ -59,7 +59,7 @@ data = np.column_stack((
 ))
 
 np.savetxt(
-    'data/four_edge.csv',
+    'data/four_edges.csv',
     data,
     delimiter=',',
     header='x,y,V',
