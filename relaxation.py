@@ -4,10 +4,13 @@ import numpy as np
 
 
 
-def relax(V, mask, tol: float = 1e-4, max_iter: int = 100000):
+def relax(V, mask, source=None, h: float=1,  tol: float = 1e-4, max_iter: int = 100000):
 
     #copy of the inital patential
     V = V.copy()
+
+    if source is None:
+        source = np.zeros_like(V, dtype=float)
 
     for sweep in range(1, max_iter + 1):
         V_new = V.copy()
@@ -23,8 +26,9 @@ def relax(V, mask, tol: float = 1e-4, max_iter: int = 100000):
                             V[i + 1, j] +
                             V[i - 1, j] +
                             V[i, j + 1] +
-                            V[i, j - 1]
-                    )
+                            V[i, j - 1] +
+                            h**2 source[i, j])  
+         
         #jede Zellen bei der die maske True ist werden wieder auf ihren alten Wert gesetz
         V_new[mask] = V[mask]
 
