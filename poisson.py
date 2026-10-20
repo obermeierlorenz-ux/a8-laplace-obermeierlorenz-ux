@@ -50,6 +50,16 @@ max_V = V_final[max_index]
 print('maximum potential:', max_V)
 print('maximum location:', (max_x, max_y))
 
+# Check: grounded boundaries without a source give V = 0 everywhere
+V_test = np.zeros((N, N))
+
+V_zero, sweeps_zero, max_change_zero = relax(V_test, mask)
+
+print()
+print('check without source:')
+print('maximum absolute potential:', np.max(np.abs(V_zero)))
+print()
+
 #save cell center coordination and final potential
 data = np.column_stack((
     X.ravel(),

@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from pathlib import Path
 
+
 def plot_potential(data_file, plot_name, case_name ,vmin, vmax):
 
     #Load saved x, y and potential values
@@ -17,6 +18,13 @@ def plot_potential(data_file, plot_name, case_name ,vmin, vmax):
     X = data[:, 0].reshape(N, N)
     Y = data[:, 1].reshape(N, N)
     V = data[:, 2].reshape(N, N)
+
+    # Use the data range if no limits were given
+    if vmin is None:
+        vmin = np.min(V)
+
+    if vmax is None:
+        vmax = np.max(V)
 
     # Create plots folder if it does not exist
     Path('plots').mkdir(exist_ok=True)
@@ -70,6 +78,7 @@ def plot_potential(data_file, plot_name, case_name ,vmin, vmax):
         dpi=300,
         bbox_inches='tight'
     )
+
 
     plt.show()
 
@@ -190,6 +199,10 @@ def plot_dipole():
         bbox_inches='tight'
     )
 
+
+    plt.show()
+    
+
     fig2, ax2 = plt.subplots()
 
     levels = np.linspace(-1.0, 1.0, 21)
@@ -259,3 +272,11 @@ def plot_dipole():
     plt.show()
 
 plot_dipole()
+
+plot_potential(
+    'data/poisson.csv',
+    'poisson',
+    'Poisson Equation: Gaussian Source',
+    vmin=0.0,
+    vmax=None
+)
